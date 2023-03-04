@@ -1,15 +1,23 @@
 import { PlusCircle } from 'phosphor-react'
+import { useState } from 'react'
+import { ContentList } from '../ContentList'
 import {
   BodyContainer,
   HeaderInput,
   HeaderList,
   HeaderListItem,
-  TodoBody,
 } from './styles'
 
-import clipboard from '../../assets/clipboard-icon.svg'
-
 export function Body() {
+  const [task, setTask] = useState([''])
+  function deleteTask(taskToDelete: string) {
+    const taskWithoutDelete = task.filter((tasks) => {
+      return tasks !== taskToDelete
+    })
+
+    setTask(taskWithoutDelete)
+  }
+
   return (
     <BodyContainer>
       <HeaderInput>
@@ -31,11 +39,17 @@ export function Body() {
         </HeaderListItem>
       </HeaderList>
 
-      <TodoBody>
-        <img src={clipboard} alt="" />
-        <h2>Você ainda não tem tarefas cadastradas</h2>
-        <span>Crie tarefas e organize seus itens a fazer</span>
-      </TodoBody>
+      <div>
+        {task.map((tasks) => {
+          return (
+            <ContentList
+              key={tasks}
+              description={tasks}
+              onDeleteTask={deleteTask}
+            />
+          )
+        })}
+      </div>
     </BodyContainer>
   )
 }
