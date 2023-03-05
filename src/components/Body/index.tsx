@@ -1,5 +1,5 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { PlusCircle } from 'phosphor-react'
-import { useState } from 'react'
 import { ContentList } from '../ContentList'
 import {
   BodyContainer,
@@ -7,9 +7,12 @@ import {
   HeaderList,
   HeaderListItem,
 } from './styles'
+import { EmptyList } from '../EmptyList'
 
 export function Body() {
   const [task, setTask] = useState([''])
+  const [newTask, setNewTask] = useState('')
+
   function deleteTask(taskToDelete: string) {
     const taskWithoutDelete = task.filter((tasks) => {
       return tasks !== taskToDelete
@@ -18,14 +21,34 @@ export function Body() {
     setTask(taskWithoutDelete)
   }
 
+  function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault()
+
+    setTask([...task, newTask])
+    setNewTask('')
+  }
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('')
+    setNewTask(event.target.value)
+  }
+
   return (
     <BodyContainer>
       <HeaderInput>
-        <input type="text" placeholder="Adicione uma nova tarefa" />
-        <button>
-          Criar
-          <PlusCircle size={20} />
-        </button>
+        <form onSubmit={handleCreateNewTask}>
+          <input
+            type="text"
+            placeholder="Adicione uma nova tarefa"
+            value={newTask}
+            onChange={handleNewTaskChange}
+          />
+
+          <button>
+            Criar
+            <PlusCircle size={20} />
+          </button>
+        </form>
       </HeaderInput>
 
       <HeaderList>
@@ -40,6 +63,8 @@ export function Body() {
       </HeaderList>
 
       <div>
+        {task.length === 0 && <EmptyList />}
+
         {task.map((tasks) => {
           return (
             <ContentList

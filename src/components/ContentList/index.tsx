@@ -7,8 +7,15 @@ interface TaskProps {
   onDeleteTask: (description: string) => void
 }
 
+interface TaskControl {
+  taskList: TaskProps
+  quantity: number
+  isActive: boolean
+}
+
 export function ContentList({ description, onDeleteTask }: TaskProps) {
   const [isCheckbox, setCheckbox] = useState(false)
+
   const handleOnChange = () => {
     setCheckbox(!isCheckbox)
   }
@@ -16,6 +23,7 @@ export function ContentList({ description, onDeleteTask }: TaskProps) {
   function handleDeleteTask() {
     onDeleteTask(description)
   }
+
   return (
     <BodyContentList>
       <ContentListItem>
@@ -25,10 +33,7 @@ export function ContentList({ description, onDeleteTask }: TaskProps) {
           checked={isCheckbox}
           onChange={handleOnChange}
         />
-        <p>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
-        </p>
+        <p>{description}</p>
         <button onClick={handleDeleteTask} title="Delte task">
           <Trash size={22} />
         </button>
