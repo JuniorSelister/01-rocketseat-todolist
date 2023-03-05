@@ -54,11 +54,11 @@ export function Body() {
       <HeaderList>
         <HeaderListItem>
           <h2>Tarefas criadas</h2>
-          <span>5</span>
+          <span>{task.length}</span>
         </HeaderListItem>
         <HeaderListItem>
           <h2 className="finished-h2">Concluídas</h2>
-          <span className="finished-span">2 de 5</span>
+          <span className="finished-span">x de {task.length}</span>
         </HeaderListItem>
       </HeaderList>
 

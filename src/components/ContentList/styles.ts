@@ -9,9 +9,9 @@ export const BodyContentList = styled.div`
 export const ContentListItem = styled(BodyContentList)`
   box-sizing: border-box;
 
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 12fr 1fr;
+  align-items: center;
   padding: 16px;
   gap: 12px;
 
@@ -29,13 +29,33 @@ export const ContentListItem = styled(BodyContentList)`
   align-self: stretch;
   flex-grow: 0;
 
+  .circle {
+    color: ${(props) => props.theme['blue-light']};
+  }
+
+  .circle:hover {
+    background: transparent;
+    color: ${(props) => props.theme['blue-dark']};
+    fill: ${(props) => props.theme['blue-dark']};
+  }
+
+  .checkCircle {
+    color: ${(props) => props.theme['purple-dark']};
+  }
+
+  .checkCircle:hover {
+    color: ${(props) => props.theme['purple-light']};
+  }
+
+  .textScratch {
+    text-decoration: line-through;
+    color: ${(props) => props.theme['gray-300']};
+  }
+
   .checkLayout {
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    justify-self: center;
 
     background: transparent;
-    color: ${(props) => props.theme['blue-light']};
     border-radius: 50%;
     width: 1.5rem;
     height: 1.5rem;
@@ -49,10 +69,11 @@ export const ContentListItem = styled(BodyContentList)`
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${(props) => props.theme['gray-300']};
   }
 
   button:hover {
-    background: ${(props) => props.theme['gray-400']};
+    color: ${(props) => props.theme['gray-400']};
     border-radius: 4px;
     cursor: pointer;
     color: ${(props) => props.theme['red-danger']};

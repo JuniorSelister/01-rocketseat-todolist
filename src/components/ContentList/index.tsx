@@ -1,4 +1,4 @@
-import { Trash } from 'phosphor-react'
+import { CheckCircle, Circle, Trash } from 'phosphor-react'
 import { useState } from 'react'
 import { BodyContentList, ContentListItem } from './styles'
 
@@ -27,14 +27,16 @@ export function ContentList({ description, onDeleteTask }: TaskProps) {
   return (
     <BodyContentList>
       <ContentListItem>
-        <input
-          type="checkbox"
-          className="checkLayout"
-          checked={isCheckbox}
-          onChange={handleOnChange}
-        />
-        <p>{description}</p>
-        <button onClick={handleDeleteTask} title="Delte task">
+        <button onClick={handleOnChange} className="circle">
+          {isCheckbox === false ? (
+            <Circle size={24} className="circle" />
+          ) : (
+            <CheckCircle size={24} weight={'fill'} className="checkCircle" />
+          )}
+        </button>
+
+        <p className={isCheckbox ? 'textScratch' : ''}>{description}</p>
+        <button onClick={handleDeleteTask} title="Delete task">
           <Trash size={22} />
         </button>
       </ContentListItem>

@@ -16,6 +16,12 @@ export const HeaderInput = styled.div`
   width: 46rem;
   gap: 0.5rem;
 
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
   input {
     width: 39.875rem;
     height: 3.375rem;
