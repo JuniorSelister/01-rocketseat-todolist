@@ -1,13 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
 import { PlusCircle } from 'phosphor-react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { ContentList } from '../ContentList'
+import { BodyContentList } from '../ContentList/styles'
+import { EmptyList } from '../EmptyList'
 import {
   BodyContainer,
   HeaderInput,
   HeaderList,
   HeaderListItem,
 } from './styles'
-import { EmptyList } from '../EmptyList'
 
 export function Body() {
   const [task, setTask] = useState([''])
@@ -33,6 +34,8 @@ export function Body() {
     setNewTask(event.target.value)
   }
 
+  const isNewTaskEmpty = newTask.length === 0
+
   return (
     <BodyContainer>
       <HeaderInput>
@@ -44,7 +47,7 @@ export function Body() {
             onChange={handleNewTaskChange}
           />
 
-          <button>
+          <button disabled={isNewTaskEmpty}>
             Criar
             <PlusCircle size={20} />
           </button>
@@ -58,13 +61,13 @@ export function Body() {
         </HeaderListItem>
         <HeaderListItem>
           <h2 className="finished-h2">Concluídas</h2>
-          <span className="finished-span">x de {task.length}</span>
+          <span className="finished-span">
+            {task.length} de {task.length}
+          </span>
         </HeaderListItem>
       </HeaderList>
-
-      <div>
+      <BodyContentList>
         {task.length === 0 && <EmptyList />}
-
         {task.map((tasks) => {
           return (
             <ContentList
@@ -74,7 +77,7 @@ export function Body() {
             />
           )
         })}
-      </div>
+      </BodyContentList>
     </BodyContainer>
   )
 }

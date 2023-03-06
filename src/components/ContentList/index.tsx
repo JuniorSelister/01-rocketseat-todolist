@@ -4,13 +4,8 @@ import { BodyContentList, ContentListItem } from './styles'
 
 interface TaskProps {
   description: string
+  isActive: () => void
   onDeleteTask: (description: string) => void
-}
-
-interface TaskControl {
-  taskList: TaskProps
-  quantity: number
-  isActive: boolean
 }
 
 export function ContentList({ description, onDeleteTask }: TaskProps) {

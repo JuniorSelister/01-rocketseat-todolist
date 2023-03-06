@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TodoBody = styled.div`
   height: 15.25rem;
-  width: 70%;
+  width: 46rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
