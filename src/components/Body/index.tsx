@@ -11,7 +11,7 @@ import {
 } from './styles'
 
 export function Body() {
-  const [task, setTask] = useState([''])
+  const [task, setTask] = useState([]<String>)
   const [newTask, setNewTask] = useState('')
 
   function deleteTask(taskToDelete: string) {
